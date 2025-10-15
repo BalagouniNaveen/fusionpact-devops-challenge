@@ -1,0 +1,13 @@
+global:
+  scrape_interval: 15s   # Default scrape interval for all jobs
+
+scrape_configs:
+  - job_name: 'prometheus'          # Prometheus monitors itself
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'backend'             # Your backend metrics job
+    scrape_interval: 15s
+    metrics_path: /metrics          # Default, but explicitly stated here
+    static_configs:
+      - targets: ['backend:8000']  # Docker service name and port where backend exposes metrics
